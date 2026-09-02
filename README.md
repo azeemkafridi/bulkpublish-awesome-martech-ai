@@ -246,6 +246,7 @@ The major buying surfaces are Google Ads, Meta Ads, Amazon Ads, TikTok Ads, reta
 - [Braze (BrazeAI)](https://www.braze.com/product/brazeai) — BrazeAI (formerly Sage AI) for AI-driven personalization and journey optimization.
 - [Customer.io](https://customer.io/) — Developer-friendly lifecycle messaging.
 - [OneSignal](https://onesignal.com/) — Push and in-app messaging.
+- [BulkPublish](https://github.com/azeemkafridi/bulkpublish-api) — API and AI-agent skills for planning, adapting, reviewing, scheduling, and publishing social media content across channels.
 
 ### Creative Production and DCO
 
