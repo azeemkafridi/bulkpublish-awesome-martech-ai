@@ -399,6 +399,7 @@ Customer service, sales and proactive relationships can span conversations and t
 - [Ada](https://www.ada.cx/) — Customer-service automation reference.
 - [Cognigy](https://www.cognigy.com/) — Contact-center conversational platform reference.
 - [Parloa](https://www.parloa.com/) — Contact-center conversational platform reference.
+- [Hermes](https://www.buildwithhermes.com/integrations) — Vendor-described voice-agent platform for agencies, combining voice providers, CRM and per-client billing; private-beta product reference, with unverified deployment and business effects; [source review](docs/community-resource-reviews.md#hermes), 2026-09-30.
 
 ### Form 4 — Agent-Mediated Discovery
 

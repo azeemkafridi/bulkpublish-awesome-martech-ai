@@ -10,3 +10,12 @@ Suggested by Yuting Zhong in [PR #2](https://github.com/leoncuhk/awesome-martech
 - Supported scope: public skill files describe advertising, GA4 and Search Console workflows. Live account operations use one vendor-hosted OAuth connection; platform access depends on connected accounts and exposed capabilities.
 - Placement: agent-building inputs and tool integrations, rather than a general orchestration engine. The public skill repository is distinct from the hosted service.
 - Limits: no connected-account reproduction, independent effect estimate or security certification. Star counts and an implication that all MCP/backend implementations are open source were removed.
+
+## Hermes
+
+Suggested by `alfredoautomatizaloconia-cloud` in [PR #3](https://github.com/leoncuhk/awesome-martech-ai/pull/3). The README conflict was resolved against the current Form 3 section without reverting the maintainer's framework or demo.
+
+- Evidence: official [integration descriptions](https://www.buildwithhermes.com/integrations) and [operator product page](https://www.buildwithhermes.com/operators), checked 2026-09-30. The pages label themselves last reviewed June 2026; a distinct publication date is not supplied.
+- Supported scope: vendor describes bundled voice providers, CRM, calendar connections and per-client billing. The operator page advertises private beta and a future public launch. Inclusion records product positioning, rather than demonstrated general availability or independently verified operation.
+- Placement: an agency-oriented customer-interaction platform reference in Form 3. Its tenant isolation, deployment scale, quality checks and compliance controls were not independently inspected.
+- Limits: no public code or reproducible deployment evidence was examined. Pricing/usage details differ across product pages, so exact rates, margins, savings and beta testimonials are excluded. Capability descriptions do not establish sales lift or service resolution.
