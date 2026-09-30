@@ -1,0 +1,416 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Incrementality learning case package v2",
+  "description": "Additional runtime checks enforce unique units, allocation sum, scenario budget range and valid generator probabilities. Imported evidence is not authenticated.",
+  "type": "object",
+  "required": ["version", "case"],
+  "properties": {
+    "version": {
+      "const": "2.0"
+    },
+    "exportedAt": {
+      "type": "string"
+    },
+    "case": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "kind",
+        "question",
+        "channel",
+        "method",
+        "goal",
+        "threshold",
+        "weeks",
+        "budget",
+        "total",
+        "allocationMode",
+        "guardrail",
+        "allocations",
+        "evidence",
+        "plan"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "channel": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "guardrail": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 10000
+        },
+        "kind": {
+          "enum": ["public", "scenario", "custom", "computed"]
+        },
+        "method": {
+          "enum": [
+            "User Randomized Holdout",
+            "Geo Holdout",
+            "Switchback",
+            "Interrupted Time Series",
+            "Operational Review"
+          ]
+        },
+        "goal": {
+          "enum": ["orders", "netRevenue", "contribution"]
+        },
+        "threshold": {
+          "type": "number"
+        },
+        "returnGate": {
+          "type": ["number", "null"],
+          "minimum": 0
+        },
+        "weeks": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 52
+        },
+        "budget": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000000.0
+        },
+        "total": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1500000000
+        },
+        "allocationMode": {
+          "enum": ["baseline", "candidate"]
+        },
+        "riskChoice": {
+          "type": "boolean"
+        },
+        "imported": {
+          "type": "boolean"
+        },
+        "scenario": {
+          "enum": ["supported", "below", "uncertain", "invalid"]
+        },
+        "allocations": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 12,
+          "items": {
+            "type": "object",
+            "required": ["channel", "share"],
+            "properties": {
+              "channel": {
+                "type": "string",
+                "maxLength": 100,
+                "minLength": 1
+              },
+              "share": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "evidence": {
+          "type": "array",
+          "maxItems": 30,
+          "items": {
+            "type": "object",
+            "required": [
+              "label",
+              "value",
+              "type",
+              "date",
+              "definition",
+              "limitation"
+            ],
+            "properties": {
+              "label": {
+                "type": "string",
+                "maxLength": 2000
+              },
+              "value": {
+                "type": "string",
+                "maxLength": 2000
+              },
+              "type": {
+                "type": "string",
+                "maxLength": 2000
+              },
+              "date": {
+                "type": "string",
+                "maxLength": 2000
+              },
+              "definition": {
+                "type": "string",
+                "maxLength": 2000
+              },
+              "limitation": {
+                "type": "string",
+                "maxLength": 2000
+              },
+              "url": {
+                "type": "string",
+                "pattern": "^https://|^$",
+                "maxLength": 2000
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "plan": {
+          "type": "object",
+          "required": [
+            "channel",
+            "method",
+            "weeks",
+            "budget",
+            "delayHours",
+            "blockHours",
+            "washoutHours",
+            "dataReady",
+            "randomizable",
+            "interference"
+          ],
+          "properties": {
+            "channel": {
+              "type": "string",
+              "maxLength": 300,
+              "minLength": 1
+            },
+            "method": {
+              "enum": [
+                "User Randomized Holdout",
+                "Geo Holdout",
+                "Switchback",
+                "Interrupted Time Series",
+                "Operational Review"
+              ]
+            },
+            "weeks": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 52
+            },
+            "budget": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "maximum": 1000000000.0
+            },
+            "delayHours": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 8760
+            },
+            "blockHours": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 8760
+            },
+            "washoutHours": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 8760
+            },
+            "dataReady": {
+              "type": "boolean"
+            },
+            "randomizable": {
+              "type": "boolean"
+            },
+            "interference": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false
+        },
+        "generator": {
+          "type": "object",
+          "required": ["seed", "n", "baseline", "effect"],
+          "properties": {
+            "seed": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4294967295
+            },
+            "n": {
+              "type": "integer",
+              "minimum": 100,
+              "maximum": 50000
+            },
+            "baseline": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "exclusiveMaximum": 1
+            },
+            "effect": {
+              "type": "number"
+            }
+          },
+          "additionalProperties": false
+        },
+        "rawRows": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 100000,
+          "items": {
+            "type": "object",
+            "required": [
+              "unit_id",
+              "assignment",
+              "converted",
+              "net_revenue",
+              "variable_cost",
+              "marketing_cost"
+            ],
+            "properties": {
+              "unit_id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 80
+              },
+              "assignment": {
+                "enum": ["treatment", "control"]
+              },
+              "converted": {
+                "enum": [0, 1]
+              },
+              "net_revenue": {
+                "type": "number",
+                "minimum": 0
+              },
+              "variable_cost": {
+                "type": "number",
+                "minimum": 0
+              },
+              "marketing_cost": {
+                "type": "number",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "computed"
+              }
+            }
+          },
+          "then": {
+            "required": ["rawRows"],
+            "properties": {
+              "method": {
+                "const": "User Randomized Holdout"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "scenario"
+              }
+            }
+          },
+          "then": {
+            "required": ["scenario"],
+            "properties": {
+              "allocations": {
+                "minItems": 6,
+                "maxItems": 6,
+                "items": [
+                  {
+                    "properties": {
+                      "channel": {
+                        "const": "Brand search"
+                      }
+                    }
+                  },
+                  {
+                    "properties": {
+                      "channel": {
+                        "const": "Prospecting"
+                      }
+                    }
+                  },
+                  {
+                    "properties": {
+                      "channel": {
+                        "const": "Video"
+                      }
+                    }
+                  },
+                  {
+                    "properties": {
+                      "channel": {
+                        "const": "Other media"
+                      }
+                    }
+                  },
+                  {
+                    "properties": {
+                      "channel": {
+                        "const": "Validation budget"
+                      }
+                    }
+                  },
+                  {
+                    "properties": {
+                      "channel": {
+                        "const": "Unspent reserve"
+                      }
+                    }
+                  }
+                ]
+              },
+              "method": {
+                "const": "Switchback"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "analysis": {
+      "type": ["object", "null"]
+    },
+    "decision": {
+      "type": "object"
+    },
+    "allocation": {
+      "type": "array"
+    },
+    "boundary": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

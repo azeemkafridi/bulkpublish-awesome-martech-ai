@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="An educational incrementality prototype with evidence boundaries, conditional decisions and reproducible synthetic randomized-user analysis."
+    />
+    <title>Incrementality Lab — Evidence to Decisions</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="engine.js" defer></script>
+    <script src="data.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="workspace">
+          <small>AWESOME MARTECH AI</small><strong>Incrementality Lab</strong>
+        </div>
+        <nav class="nav" aria-label="Main navigation">
+          <button data-page="overview" aria-current="page">
+            <span>Overview</span>
+          </button>
+          <button data-page="experiments"><span>Experiments</span></button>
+          <button data-page="budget"><span>Budget scenarios</span></button>
+          <button data-page="library"><span>Case library</span></button>
+          <button data-page="sources"><span>Evidence & data</span></button>
+        </nav>
+        <div class="side-note">
+          <b>Evidence before action</b><br />Public disclosures, scenario
+          assumptions and computed synthetic results have different meanings.<br /><br /><a
+            href="README.md"
+            style="color: inherit"
+            >Read the guide</a
+          >
+        </div>
+      </aside>
+      <main class="main">
+        <div class="notice">
+          <b>Educational prototype.</b> Public cases illustrate evidence
+          boundaries. NOVA uses prewritten scenarios. Only the randomized-user
+          lab computes effects from synthetic raw data. No live connectors,
+          experiment execution or ad-account writes.
+        </div>
+        <div class="toolbar">
+          <label for="caseSelect">Current case</label>
+          <div class="select-wrap"><select id="caseSelect"></select></div>
+          <button class="btn" id="exportCase">Export current case</button>
+          <button class="btn" id="importCase">Import case package</button>
+          <input
+            id="importFile"
+            type="file"
+            accept=".json,application/json"
+            hidden
+          />
+          <label class="checkbox-label"
+            ><input type="checkbox" id="presentationMode" />Presentation
+            mode</label
+          >
+        </div>
+        <section
+          class="page active"
+          id="overview"
+          aria-labelledby="overviewTitle"
+        >
+          <div class="topline">
+            <div class="heading">
+              <h1 id="overviewTitle"></h1>
+              <p id="overviewLead"></p>
+            </div>
+            <span class="demo-badge" id="caseBadge"></span>
+          </div>
+          <article class="card">
+            <h2 id="caseQuestion"></h2>
+            <p id="caseDescription"></p>
+          </article>
+          <div id="resultControls" class="section-space"></div>
+          <div
+            id="decision"
+            class="status-line section-space"
+            aria-live="polite"
+          ></div>
+          <div id="metrics" class="metric-grid section-space"></div>
+          <article
+            id="analysisChart"
+            class="card interval-chart section-space"
+          ></article>
+          <details class="card section-space" id="journey">
+            <summary>Explore the six-stage evidence workflow</summary>
+            <div class="stage-nav section-space" id="stageNav"></div>
+            <div class="stage-panel">
+              <div id="stageMain"></div>
+              <aside class="stage-side" id="stageSide"></aside>
+            </div>
+            <div class="horizontal section-space">
+              <button class="btn" id="prevStage">Previous stage</button
+              ><button class="btn" id="nextStage">Next stage</button
+              ><button class="btn" id="openCurrentExperiment">
+                Open this case's experiment
+              </button>
+            </div>
+          </details>
+          <article class="card section-space" id="presentation" hidden>
+            <h2>Six-minute presentation</h2>
+            <ol>
+              <li>
+                State the decision and distinguish attributed outcomes from
+                incremental value.
+              </li>
+              <li>
+                Inspect each metric's provenance and the missing counterfactual.
+              </li>
+              <li>
+                Review assignment, outcome maturity, carryover and permissions.
+              </li>
+              <li>Compare the interval with the business requirement.</li>
+              <li>Switch to uncertainty or invalid-data scenarios.</li>
+              <li>
+                Review a reversible candidate or preserve the baseline, then
+                export the complete case.
+              </li>
+            </ol>
+          </article>
+        </section>
+        <section
+          class="page"
+          id="experiments"
+          aria-labelledby="experimentsTitle"
+        >
+          <div class="topline">
+            <div class="heading">
+              <h1 id="experimentsTitle">Experiment review</h1>
+              <p>
+                Completion, data validity and decision sufficiency are separate
+                states.
+              </p>
+            </div>
+            <button class="btn primary open-planner">
+              Review experiment plan
+            </button>
+          </div>
+          <div id="experimentContent"></div>
+        </section>
+        <section class="page" id="budget" aria-labelledby="budgetTitle">
+          <div class="topline">
+            <div class="heading">
+              <h1 id="budgetTitle">Budget scenarios</h1>
+              <p>
+                Compare a complete baseline with a candidate. No revenue
+                forecast or marginal-return estimate is invented.
+              </p>
+            </div>
+            <button class="btn" id="downloadBudget">
+              Download displayed plan
+            </button>
+          </div>
+          <article class="card">
+            <label for="budgetRange"
+              ><b
+                >Total available funds (USD; fictional planning amounts)</b
+              ></label
+            >
+            <div class="budget-total" id="budgetTotal"></div>
+            <input
+              type="range"
+              id="budgetRange"
+              aria-label="Total available funds in US dollars"
+            />
+            <div class="scenario-controls section-space">
+              <label
+                >Allocation mode<select id="allocationMode">
+                  <option value="baseline">Maintain status quo</option>
+                  <option value="candidate">Candidate scenario</option>
+                </select></label
+              ><label class="checkbox-label"
+                ><input type="checkbox" id="riskChoice" />Record a reversible
+                business choice under uncertainty</label
+              >
+            </div>
+            <p id="budgetDecision"></p>
+            <p class="definition">
+              Changing total funds scales the status-quo proportions first.
+              Candidate and baseline are compared at the same total. Validation
+              budget is spent; reserve is unspent. No scenario is executed.
+            </p>
+            <div class="responsive-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Channel / purpose</th>
+                    <th>Status quo</th>
+                    <th>Candidate</th>
+                    <th>Difference</th>
+                  </tr>
+                </thead>
+                <tbody id="budgetRows"></tbody>
+                <tfoot id="budgetFoot"></tfoot>
+              </table>
+            </div>
+            <p id="budgetRationale" class="definition"></p>
+          </article>
+        </section>
+        <section class="page" id="library" aria-labelledby="libraryTitle">
+          <div class="topline">
+            <div class="heading">
+              <h1 id="libraryTitle">Case library</h1>
+              <p>
+                Public evidence, local draft plans and synthetic learning cases.
+              </p>
+            </div>
+            <button class="btn primary" id="openBuilder">
+              Create a draft case
+            </button>
+          </div>
+          <div class="toolbar">
+            <button class="btn" id="downloadTemplate">
+              Download blank template</button
+            ><a class="btn" href="case-schema.json" download
+              >Download JSON Schema</a
+            >
+          </div>
+          <p class="definition">
+            Drafts exist in this page session. Export a case package to save it
+            and import it to restore. This is not an authenticated private
+            workspace. Use synthetic or non-sensitive data.
+          </p>
+          <div id="caseLibrary" class="source-grid"></div>
+        </section>
+        <section class="page" id="sources" aria-labelledby="sourcesTitle">
+          <div class="topline">
+            <div class="heading">
+              <h1 id="sourcesTitle">Evidence and data contract</h1>
+              <p>
+                Click a metric to inspect source, date, definition and what it
+                cannot establish.
+              </p>
+            </div>
+            <a class="btn" href="sources.md">Read source ledger</a>
+          </div>
+          <div id="evidenceGrid" class="evidence-grid"></div>
+          <article class="card section-space">
+            <h2>Shared metric and execution definitions</h2>
+            <ul>
+              <li>
+                <b>Intention to treat:</b> compare all assigned units,
+                regardless of delivery or engagement.
+              </li>
+              <li>
+                <b>Net revenue:</b> deduct discounts and mature refunds
+                consistently; do not deduct them twice.
+              </li>
+              <li>
+                <b>Incremental contribution:</b> difference in net revenue minus
+                product/fulfillment costs and marketing costs.
+              </li>
+              <li>
+                <b>iROAS:</b> incremental net revenue / positive incremental
+                marketing spend; distinct from ROI and marginal spend response.
+              </li>
+              <li>
+                <b>95% interval:</b> coverage of a specified repeated procedure
+                under assumptions; not a 95% probability that the claim is true.
+              </li>
+              <li>
+                <b>Execution:</b> recheck consent, eligibility, inventory,
+                frequency, spend limits, idempotency and rollback before any
+                real action.
+              </li>
+            </ul>
+            <p class="definition">
+              Connectors: not implemented. Power analysis: not implemented. Geo,
+              switchback and ITS analysis: planning only. Public case
+              disclosures: cited, not re-estimated.
+            </p>
+          </article>
+        </section>
+      </main>
+    </div>
+    <dialog id="evidenceDialog" aria-labelledby="evidenceTitle">
+      <div class="dialog-head">
+        <h2 id="evidenceTitle">Evidence card</h2>
+        <button class="icon-btn close-dialog" aria-label="Close evidence">
+          ×
+        </button>
+      </div>
+      <div id="evidenceDetails"></div>
+    </dialog>
+    <dialog id="experimentDialog" aria-labelledby="experimentDialogTitle">
+      <div class="dialog-head">
+        <h2 id="experimentDialogTitle"></h2>
+        <button class="icon-btn close-dialog" aria-label="Close experiment">
+          ×
+        </button>
+      </div>
+      <div id="experimentDetails"></div>
+    </dialog>
+    <dialog id="plannerDialog" aria-labelledby="plannerTitle">
+      <div class="dialog-head">
+        <h2 id="plannerTitle">Experiment feasibility</h2>
+        <button class="icon-btn close-dialog" aria-label="Close planner">
+          ×
+        </button>
+      </div>
+      <form id="plannerForm">
+        <div class="form-grid">
+          <div class="field">
+            <label for="planChannel">Channel</label
+            ><input id="planChannel" maxlength="100" required />
+          </div>
+          <div class="field">
+            <label for="planMethod">Planning method</label
+            ><select id="planMethod"></select>
+          </div>
+          <div class="field">
+            <label for="planWeeks">Observation duration (weeks)</label
+            ><input
+              id="planWeeks"
+              type="number"
+              min="1"
+              max="52"
+              step="1"
+              required
+            />
+          </div>
+          <div class="field">
+            <label for="planBudget">Planning budget (USD)</label
+            ><input
+              id="planBudget"
+              type="number"
+              min="1"
+              max="1000000000"
+              required
+            />
+          </div>
+          <div class="field">
+            <label for="planDelay">Expected outcome delay (hours)</label
+            ><input id="planDelay" type="number" min="0" max="8760" required />
+          </div>
+          <div class="field">
+            <label for="planBlock">Switchback block length (hours)</label
+            ><input id="planBlock" type="number" min="0" max="8760" required />
+          </div>
+          <div class="field">
+            <label for="planWashout">Switchback washout (hours)</label
+            ><input
+              id="planWashout"
+              type="number"
+              min="0"
+              max="8760"
+              required
+            />
+          </div>
+        </div>
+        <p class="definition">
+          These inputs are assumptions for review. No power, sample size or
+          carryover model is calculated. Timing outside switchback still records
+          outcome maturity.
+        </p>
+        <div class="facts">
+          <label class="checkbox-label"
+            ><input type="checkbox" id="planReady" />Assignment, exposure and
+            mature outcome data validated</label
+          ><label class="checkbox-label"
+            ><input type="checkbox" id="planRandom" />Controllable random
+            assignment confirmed</label
+          ><label class="checkbox-label"
+            ><input type="checkbox" id="planInterference" />Potential cross-unit
+            interference</label
+          >
+        </div>
+        <div id="planPreview" class="plan-preview"></div>
+        <p class="error" id="planError" role="alert"></p>
+        <div class="modal-actions">
+          <button type="button" class="btn close-dialog">Close</button
+          ><button type="submit" class="btn primary">
+            Save and download draft plan
+          </button>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="builderDialog" aria-labelledby="builderTitle">
+      <div class="dialog-head">
+        <h2 id="builderTitle">Create a local draft</h2>
+        <button class="icon-btn close-dialog" aria-label="Close builder">
+          ×
+        </button>
+      </div>
+      <form id="builderForm">
+        <div class="form-grid">
+          <div class="field">
+            <label for="builderCompany">Company / case name</label
+            ><input id="builderCompany" maxlength="100" required />
+          </div>
+          <div class="field">
+            <label for="builderChannel">Channel</label
+            ><input
+              id="builderChannel"
+              maxlength="100"
+              value="Lifecycle email"
+              required
+            />
+          </div>
+          <div class="field" style="grid-column: 1/-1">
+            <label for="builderQuestion">Decision question</label
+            ><textarea id="builderQuestion" maxlength="300" required>
+Does contacting eligible customers improve contribution versus no contact?</textarea>
+          </div>
+          <div class="field">
+            <label for="builderMethod">Planned method</label
+            ><select id="builderMethod"></select>
+          </div>
+          <div class="field">
+            <label for="builderWeeks">Observation duration (weeks)</label
+            ><input
+              id="builderWeeks"
+              type="number"
+              min="1"
+              max="52"
+              value="6"
+              required
+            />
+          </div>
+          <div class="field">
+            <label for="builderGoal">Primary objective</label
+            ><select id="builderGoal">
+              <option value="orders">
+                Conversion-rate difference (percentage points)
+              </option>
+              <option value="netRevenue">
+                Incremental net revenue / eligible user (USD)
+              </option>
+              <option value="contribution">
+                Incremental contribution / eligible user (USD)
+              </option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="builderThreshold" id="builderThresholdLabel"
+              >Business requirement (percentage points)</label
+            ><input
+              id="builderThreshold"
+              type="number"
+              step="any"
+              value="1"
+              required
+            />
+          </div>
+          <div class="field">
+            <label for="builderBudget">Total planning funds (USD)</label
+            ><input
+              id="builderBudget"
+              type="number"
+              min="1"
+              max="1000000000"
+              value="500000"
+              required
+            />
+          </div>
+          <div class="field">
+            <label for="builderGuardrail">Safety guardrail</label
+            ><input
+              id="builderGuardrail"
+              maxlength="300"
+              value="Pause if opt-outs or complaints exceed the predeclared tolerance."
+              required
+            />
+          </div>
+        </div>
+        <p class="definition">
+          No data connection, power calculation or experiment is created.
+          Results stay pending. The selected method is preserved, including
+          observational methods.
+        </p>
+        <p class="error" id="builderError" role="alert"></p>
+        <div class="modal-actions">
+          <button type="button" class="btn close-dialog">Cancel</button
+          ><button type="submit" class="btn primary">
+            Create and open case
+          </button>
+        </div>
+      </form>
+    </dialog>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>

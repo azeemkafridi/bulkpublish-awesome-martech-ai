@@ -4,15 +4,21 @@
 
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
-A curated list of AI/ML systems powering modern marketing technology — causal experimentation, user intelligence, ad systems, growth engines, conversational agents, and the emerging Agent-to-Agent marketing paradigm.
+A curated guide to marketing AI decisions: customer data, prediction, causal measurement, constrained optimization, activation and agent workflows. Resources are organized by what they help a practitioner decide and what evidence supports them.
 
 <br>
 
-<img src="assets/martech-ai-stack.png" alt="Martech AI Stack" width="720">
+<a href="assets/martech-ai-stack.png"><img src="assets/martech-ai-stack.png" alt="Original Martech AI stack overview with five core layers, technical modules and agent orchestration" width="1200"></a>
 
 </div>
 
 <br>
+
+The original stack illustration is retained as a module overview. Its feedback loop is conceptual: observed logs return to Data, while measured evidence and uncertainty inform Intelligence and decisions. Causal learning requires a valid design and assumptions; see [the detailed explanation](think/five-layers-cognitive-cycle.md).
+
+**Scope:** a technical knowledge framework for marketing AI, not a complete census of marketing software. Customer service and sales are included where they connect to customer relationships and growth.
+
+**Review baseline:** 2026-09-30. Product functionality, implementation, commercial scale and causal impact require different evidence. See [evidence standards and review notes](docs/evidence-review.md). Catalog links are learning/navigation resources; inclusion is not a performance endorsement.
 
 ## Contents
 
@@ -29,13 +35,15 @@ A curated list of AI/ML systems powering modern marketing technology — causal 
 
 **Part II — The Agent Era**
 
-- [Four Classes of Marketing Agents](#four-classes-of-marketing-agents)
+- [Four Forms of Marketing Agents](#four-forms-of-marketing-agents)
+- [Lifecycle Decisioning](#lifecycle-decisioning)
 - [LLM Agent Leverage Points](#llm-agent-leverage-points)
 - [Agent-Building Frameworks](#agent-building-frameworks)
 - [Frontier (2025/2026)](#frontier-20252026)
 
 **Part III — Applied and References**
 
+- [Interactive Demos](#interactive-demos)
 - [Industry Playbooks](#industry-playbooks)
 - [Original Research and Notes](#original-research-and-notes)
 - [Books](#books)
@@ -50,16 +58,14 @@ A curated list of AI/ML systems powering modern marketing technology — causal 
 
 ## Introduction
 
-Marketing technology (Martech) has gone through three eras:
+Marketing AI combines rules, predictive models, causal inference, optimization and generative workflows. These coexist rather than succeeding one another in clean historical eras: Google's [production CTR engineering paper](https://research.google/pubs/ad-click-prediction-a-view-from-the-trenches/) was published in 2013.
 
-1. **Rule era (pre-2015):** Segmentation by SQL, journeys by if/then, attribution by last-click.
-2. **ML era (2015–2023):** Supervised learning for CTR/CVR/LTV, multi-armed bandits for creative, uplift modeling for treatment effects, RL for bidding and budget allocation.
-3. **Agent era (2024–):** LLM-powered systems that plan, generate, decide, and act across the marketing stack — from creative production to autonomous media buying to conversational selling.
+The working objective is **long-term incremental value under budget, consent, fulfillment and customer-experience constraints**. A likely buyer is not necessarily a persuadable buyer; delivered actions are not necessarily valuable actions; a feedback loop is not necessarily a valid causal learning loop.
 
 This repository organizes the field into three parts:
 
-- **Part I — The Stack.** Six horizontal layers, from Data to Platforms, with the methods and tools that live in each.
-- **Part II — The Agent Era.** A vertical layer cutting across the stack: marketing agents in production, the four-tier framework that distinguishes them, and where LLM reasoning has structural leverage.
+- **Part I — The Stack.** Five core responsibilities, supported by Platforms and MLOps, with the methods and tools that live in each.
+- **Part II — The Agent Era.** A vertical layer cutting across the stack: marketing agent products and workflows, four overlapping operational forms and independent system descriptors, and where LLM reasoning has structural leverage.
 - **Part III — Applied and References.** Industry playbooks, original research, books, papers, and community resources.
 
 Entry selection prioritizes deployed systems with disclosed traction, peer-reviewed or production-engineering published work, and material that substantively reframes how practitioners approach a problem.
@@ -70,25 +76,25 @@ This list is the marketing-side companion to [awesome-quant-ai](https://github.c
 
 ### The Stack
 
-```
+```text
 ┌──────────────────────────────────────────────────────────────────────┐
-│                       Agent Layer (cross-cutting)                    │
-│       planning · creative · conversational · media-buying · ops      │
+│  Agents & Workflows (cross-cutting)                                  │
+│  planning · creative · conversational · media buying · operations    │
 └──────────────────────────────────────────────────────────────────────┘
 ┌──────────────────────────────────────────────────────────────────────┐
-│   Measurement   ←  A/B · Incrementality · MMM · Attribution          │
-│   Activation    ←  Paid media · CRM · Push · Conversational · Site   │
-│   Decision      ←  NBA · RTB · Allocation · Targeting                │
-│   Intelligence  ←  ML · Causal · RL · Embeddings · Foundation Models │
-│   Data          ←  CDP · Event stream · Identity graph · Clean room  │
+│  Measurement  ← A/B · Incrementality · MMM · Attribution             │
+│  Activation   ← Paid media · CRM · Push · Conversation · Site        │
+│  Decision     ← NBA · RTB · Allocation · Targeting & offers          │
+│  Intelligence ← ML · Causal · RL · Embeddings · Foundation Models    │
+│  Data         ← CDP · Events · Identity · Consent & provenance       │
 └──────────────────────────────────────────────────────────────────────┘
 ┌──────────────────────────────────────────────────────────────────────┐
-│  Platforms & MLOps (substrate):  Feature store · Experimentation     │
-│                                  platform · ML platform · Governance │
+│  Platforms & MLOps: pipelines · feature stores · model serving       │
+│  Experimentation infrastructure · observability · governance         │
 └──────────────────────────────────────────────────────────────────────┘
 ```
 
-The five core layers are connected by a closed feedback loop: data feeds intelligence, intelligence informs decisions, decisions drive activation, activation produces outcomes, outcomes are measured, and measurement returns training data to intelligence. Platforms and MLOps sit underneath as the substrate. The Agent layer sits on top as a new orchestration tier that lets natural-language goals drive behavior across all five.
+These are logical responsibilities, not mandatory service or product boundaries. Activation produces observed outcomes and action logs for Data; Measurement adds experimental records and evidence with uncertainty for Intelligence and policy review. Platforms and MLOps support all five. Agents and workflows orchestrate work across them. Selection, interference and missing counterfactuals can bias learning even when all arrows are connected.
 
 ### Cross-Layer Domain Views
 
@@ -97,14 +103,14 @@ Three terms recur in marketing-AI literature — **User Intelligence**, **Advert
 | Domain | Data | Intelligence | Decision | Activation | Measurement |
 |---|:---:|:---:|:---:|:---:|:---:|
 | User Intelligence | ● | ● | ● |  |  |
-| Advertising Systems |  | ● | ● | ● |  |
-| Growth Engine |  | ◐ | ● | ● | ● |
+| Advertising Systems | ● | ● | ● | ● | ● |
+| Growth Engine | ● | ◐ | ● | ● | ● |
 
 - **User Intelligence** — builds the system's model of the user. Lives in Data (CDP, identity), Intelligence (LTV, propensity, embeddings), and Decision (audience selection). Recommender systems are a heavy sub-area; see [recsys-papers](https://github.com/leoncuhk/recsys-papers).
-- **Advertising Systems** — buys impressions in front of users. Lives in Intelligence (ranking models such as DIN, DLRM), Decision (RTB bidding, pacing), and Activation (creative production and delivery).
+- **Advertising Systems** — matches and delivers ads. Uses Data (requests, exposure and conversion logs), Intelligence (ranking models such as DIN/DLRM), Decision (bids and pacing), Activation (delivery), and Measurement (experiments and outcome reporting).
 - **Growth Engine** — orchestrates actions to lift business metrics. Lives in Decision (NBA, budget allocation), Activation (channel orchestration), and Measurement (closed-loop experimentation). Often draws on the Intelligence layer (propensity, uplift) without owning it.
 
-A single technique — uplift modeling, for example — can appear under any of the three depending on the question being asked: targeting which users (User Intelligence), which creative (Advertising Systems), or which promotional action (Growth Engine). When the domain term is ambiguous, the resolving question is *which layer the decision lives in*, not which technique is used.
+The table shows common responsibilities, not exclusive ownership. Growth systems still require customer and execution data. Uplift estimation can inform any of these domains; fitting an effect model belongs to Intelligence, choosing an action belongs to Decision, and evaluating a policy belongs to Measurement. Identify both the business question and the responsibility before placing a resource.
 
 The rest of Part I is organized by layer rather than by domain.
 
@@ -112,27 +118,54 @@ The rest of Part I is organized by layer rather than by domain.
 
 A defensible Martech AI system is built around the loop, not around a model:
 
-1. **Define the growth objective.** Pick one north-star outcome (revenue, retained user months, qualified pipeline). Define guardrail metrics (margin, NPS, brand). Without this, optimization corrupts.
+1. **Define the growth objective.** Pick one north-star outcome (revenue, retained user months, qualified pipeline). Define guardrail metrics (margin, NPS, brand). Specify its population, horizon, costs and minimum worthwhile improvement.
 2. **Identify the decision surface.** What is the system actually choosing? An audience, a creative, a bid, a message, a timing, a channel mix? The decision determines the method.
 3. **Pick the right method for the decision type.** Prediction (supervised) ≠ causation (uplift / DiD / synthetic control) ≠ sequential decision (bandits / RL) ≠ generation (LLM). Mismatched methods are a recurring cause of failed projects.
-4. **Establish a measurement regime first.** Holdouts, geo-experiments, switchback, MMM — pick one before launching, not after.
+4. **Establish a measurement regime first.** Choose a suitable holdout, geo, switchback or observational design before launching; combine experiments and MMM where their estimands align.
 5. **Build the data contract.** Identity resolution, event taxonomy, consent state. The model is downstream of the data contract.
-6. **Ship the minimum closed loop.** End-to-end coverage beats partial-and-beautiful. A working bandit on three creatives is more valuable than a perfect CTR model with no activation.
-7. **Iterate on the bottleneck layer.** Most Martech systems stall at a specific layer (often decision or measurement, rarely modeling). Diagnose before adding complexity.
-8. **Govern the agent.** When LLM agents enter the loop, the constraint is bounded autonomy rather than raw accuracy. Define what the agent may decide, what requires human review, and what is forbidden.
+6. **Ship the minimum closed loop.** Connect data, a simple policy, authorized delivery and evaluation; validate the complete action before adding model complexity.
+7. **Iterate on the bottleneck layer.** Diagnose data, modeling, decisions, delivery and evidence separately; improve the measured bottleneck.
+8. **Govern the agent.** When LLM agents enter the loop, evaluate accuracy and bounded authority together. Define what the agent may decide, what requires human review, and what is forbidden.
 
 ### Paradigm Comparison
 
-| Paradigm | Decision type | Data appetite | Latency | Where it fits |
-|---|---|---|---|---|
-| Rule engines | Boolean / threshold | Low | Microseconds | Compliance, hard guardrails |
-| Supervised ML | Prediction | High | ~10–100 ms | CTR/CVR/LTV, propensity |
-| Causal / Uplift | Counterfactual | Medium (experiment data) | Offline | Treatment targeting, incrementality |
-| Multi-armed bandits | Exploration vs exploitation | Medium | ~ms | Creative, headlines, subject lines |
-| Reinforcement Learning | Sequential policy | High + simulator | ms–s | Bidding, pacing, NBA |
-| LLM Agents | Open-ended reasoning + tool use | Low (with retrieval) | s–min | Strategy, creative chains, conversation, Agent-to-Agent |
+| Paradigm | Decision type | Data requirements | Where it fits |
+|---|---|---|---|
+| Rule engines | Conditions / thresholds | Explicit business state and constraints | Eligibility, compliance and hard guardrails |
+| Supervised ML | Outcome prediction | Representative labeled outcomes and known delays | CTR/CVR/LTV, propensity |
+| Causal / Uplift | Intervention contrasts | Randomized data or defensible identification and overlap | Treatment targeting, incrementality |
+| Multi-armed bandits | Exploration and exploitation | Actions, assignment probabilities and mature rewards | Creative, headlines, subject lines |
+| Reinforcement Learning | Sequential policy | Transitions, rewards and interaction/policy logs; simulator when used | Bidding, pacing, next best action |
+| LLM workflows / agents | Context interpretation and tool use | Context, tools, task evaluations and bounded permissions | Strategy, creative workflows, customer interaction |
 
-Matching the paradigm to the decision type — prediction vs counterfactual vs sequential vs open-ended — is a recurring source of project success or failure.
+Data volume and latency are workload-specific. Distinguish model learning from live action selection; measure serving latency, tool costs and freshness for the intended workload. Retrieval prepares context and still requires evaluation.
+
+### Method Suitability and Baselines
+
+| Method | Suitable conditions and data | Baseline | Main failure risk |
+|---|---|---|---|
+| Prediction | Stable target, representative labeled outcomes, known delay | Rules / simple calibrated model | Selection and target leakage; prediction mistaken for uplift |
+| Uplift / causal estimation | Defined treatment, randomized data or defensible identification, overlap | No action / randomized rule policy | Confounding, weak overlap, interference |
+| Bandits | Repeatable actions, observable rewards, exploration permitted | Fixed allocation | Delayed rewards, changing arms, unsafe exploration |
+| RL | Sequential effects, logged policies, valid simulator or safe evaluation | Rules / myopic policy | Simulator bias and unsupported off-policy extrapolation |
+| MMM | Time/geo variation, controls, spend/outcome consistency, lag assumptions | Simpler aggregate model plus experiments | Collinearity, confounding, extrapolating response curves |
+| LLM workflows / agents | Context-heavy tasks, verifiable tools, bounded permissions | Fixed workflow / human process | Wrong facts, unauthorized actions, cost and latency |
+
+Predefine the estimand, observation window, business threshold and guardrails. Measure at the randomization unit; inspect carryover, interference and mature outcomes. A fixed-window experiment monitors safety during operation and estimates efficacy at the planned analysis time.
+
+### Metrics and Units
+
+| Metric | Definition to declare | Common confusion |
+|---|---|---|
+| CTR / CVR | Clicks or conversions divided by a specified eligible denominator | Different exposure, click or assigned-user denominators are not interchangeable. |
+| Absolute conversion effect | Treatment conversion rate minus control rate, in percentage points | A 2 pp increase from 10% to 12% is 20% relative lift. |
+| Relative lift | `(treatment − control) / control`, for a defined outcome; needs a nonzero denominator | A positive point estimate can still miss the business threshold. |
+| Attributed ROAS | Credited revenue / spend under an attribution rule and window | Credit is not a counterfactual effect. |
+| iROAS | Incremental net revenue / positive incremental marketing spend, for a compatible contrast and horizon | Average contrast return is not the return on the next dollar. |
+| Incremental contribution | Incremental net revenue minus incremental product/fulfillment and marketing costs | Revenue lift can be unprofitable; deduct discounts/refunds once. |
+| CLV / LTV | Expected customer value over a declared horizon and discount/cost convention | Predicted value is not the causal value of an intervention. |
+
+ROI definitions differ across sources. State the exact formula and cost coverage before comparing values. The [demo source ledger](demos/incrementality-measurement/sources.md) separates eBay's revenue-based ROI convention from its own iROAS and contribution metrics.
 
 ## Data Layer
 
@@ -140,10 +173,10 @@ The data substrate that everything else stands on: customer events, identity res
 
 ### Customer Data Platforms
 
-- [Segment](https://segment.com/) — The reference commercial CDP; event collection and downstream routing.
-- [RudderStack](https://www.rudderstack.com/) — Open-source CDP with warehouse-native architecture.
+- [Segment](https://segment.com/) — A commercial CDP for event collection and downstream routing.
+- [RudderStack](https://www.rudderstack.com/) — Customer-data infrastructure with an open-source collection/router component; warehouse-oriented product scope varies.
 - [Hightouch](https://hightouch.com/) — Reverse ETL from warehouse to activation tools; the composable-CDP pattern.
-- [Census](https://www.getcensus.com/) — Reverse ETL alternative to Hightouch.
+- [Fivetran Activations (formerly Census)](https://fivetran.com/docs/activations/overview) — Managed reverse ETL from warehouse data to business tools; reviewed 2026-09-30.
 
 ### Identity and Event Schema
 
@@ -168,30 +201,30 @@ The modeling layer: predictive ML, causal inference, reinforcement learning, emb
 
 ### Causal Inference and Uplift
 
-The discipline that separates Martech AI from generic ML: marketing decisions are interventions, not predictions.
+Marketing decisions change exposures, offers or timing. Causal evidence connects these interventions to outcomes; predictive scores answer a different question.
 
 - [Causal Inference: The Mixtape](https://mixtape.scunning.com/) by Scott Cunningham — Free book; DiD, IV, RDD, synthetic control with applied code.
 - [Causal Inference for The Brave and True](https://matheusfacure.github.io/python-causality-handbook/) by Matheus Facure — Python-first applied causal inference textbook.
 - [Trustworthy Online Controlled Experiments](https://experimentguide.com/) by Kohavi, Tang, Xu — The Microsoft/LinkedIn/Booking playbook for A/B testing at scale.
-- [CausalML](https://github.com/uber/causalml) by Uber — Uplift trees, meta-learners (S/T/X/R), production-grade.
+- [CausalML](https://github.com/uber/causalml) by Uber — Uplift trees and meta-learners for heterogeneous treatment-effect estimation.
 - [EconML](https://github.com/py-why/EconML) by Microsoft — Double ML, DR-learner, heterogeneous treatment effects.
 - [DoWhy](https://github.com/py-why/dowhy) — Causal effect estimation framework with explicit assumption modeling.
-- [Uplift Modeling for Multiple Treatments](https://arxiv.org/abs/1908.05372) — The X-learner and CMU extensions used in CRM targeting.
+- [Uplift Modeling for Multiple Treatments](https://arxiv.org/abs/1908.05372) — Zhao and Harinen (Uber): multiple treatments, treatment costs and extensions of X/R-learners; identification assumptions still apply.
 
 ### Reinforcement Learning
 
 - [Reinforcement Learning: An Introduction](http://incompleteideas.net/book/the-book-2nd.html) by Sutton & Barto — Free PDF; baseline for bandits, contextual bandits, and policy learning used in bidding and NBA.
-- [Spinning Up in Deep RL](https://spinningup.openai.com/) by OpenAI — Practical PPO/SAC/DDPG, the algorithms inside modern bidding agents.
+- [Spinning Up in Deep RL](https://spinningup.openai.com/) by OpenAI — Educational implementations and explanations of PPO/SAC/DDPG; not evidence of deployment in a particular bidder.
 
 ### User Modeling
 
 LTV, propensity, segmentation, embeddings — the user representations that feed Decision-layer choices.
 
-- [PyMC-Marketing](https://github.com/pymc-labs/pymc-marketing) — Bayesian CLV (BG/NBD, Gamma-Gamma) and MMM, production-ready.
-- [Lifetimes](https://github.com/CamDavidsonPilon/lifetimes) by Cam Davidson-Pilon — Canonical Python library for non-contractual CLV.
+- [PyMC-Marketing](https://github.com/pymc-labs/pymc-marketing) — Bayesian customer-lifetime models and MMM; evaluate model assumptions and applicability.
+- [Lifetimes](https://github.com/CamDavidsonPilon/lifetimes) by Cam Davidson-Pilon — Historical Python library for non-contractual CLV; archived 2024-06-28, with its repository referring users to PyMC-Marketing.
 - [Customer Lifetime Value at Meta](https://www.facebook.com/business/help/1730784113851988) — Meta's official guide to predictive LTV in their ad system.
 - [USE: Universal Sentence Encoder](https://tfhub.dev/google/universal-sentence-encoder/4) — Baseline for user/content embeddings.
-- [Two-Tower Models for Retrieval](https://research.google/pubs/sampling-bias-corrected-neural-modeling-for-large-corpus-item-recommendations/) — The architecture behind YouTube and most modern CDP-side retrieval.
+- [Two-Tower Models for Retrieval](https://research.google/pubs/sampling-bias-corrected-neural-modeling-for-large-corpus-item-recommendations/) — Google/YouTube research on large-corpus retrieval with sampling-bias correction.
 
 ### Ranking and Retrieval
 
@@ -204,10 +237,10 @@ The models that score and rank impressions, items, and audiences. Recommender-sy
 
 ### Foundation Models for Marketing
 
-Pretrained models applied to tabular CDP data, customer sequences, and creative generation. Early but accelerating.
+Pretrained tabular models and sequence-modeling references. A transformer architecture alone is not a broadly pretrained foundation model; transfer to customer-event data needs validation.
 
 - [TabPFN](https://github.com/PriorLabs/TabPFN) — Foundation model for small-to-mid tabular datasets.
-- [SASRec](https://arxiv.org/abs/1808.09781), [BERT4Rec](https://arxiv.org/abs/1904.06690) — Transformer architectures for user-sequence modeling, generalizing toward CDP event streams.
+- [SASRec](https://arxiv.org/abs/1808.09781), [BERT4Rec](https://arxiv.org/abs/1904.06690) — Transformer architectures for sequential recommendation; adaptation to customer-event tasks requires validation.
 
 ## Decision Layer
 
@@ -215,30 +248,32 @@ Given a user model and an inventory, which action does the system take? Bid amou
 
 ### Bidding and Pacing
 
-- [Real-Time Bidding by Reinforcement Learning in Display Advertising](https://arxiv.org/abs/1701.02490) — Foundational RL-for-bidding paper from Alibaba.
+- [Real-Time Bidding by Reinforcement Learning in Display Advertising](https://arxiv.org/abs/1701.02490) — Cai et al.: Shanghai Jiao Tong University, UCL, MediaGamma and Vlion; budget-constrained bidding modeled as sequential decisions.
 - [Google Research — Market Algorithms](https://research.google/teams/market-algorithms/) — Google's umbrella research program on auction optimization, pacing, budget-constrained mechanism design, and online matching for display advertising.
-- [Bid Shading in First-Price Auctions](https://research.criteo.com/) — Criteo and Adobe research on the post-header-bidding shift.
+- [An Efficient Deep Distribution Network for Bid Shading in First-Price Auctions](https://arxiv.org/abs/2107.06650) — Zhou et al. (2021): distribution modeling, bid optimization and reported Verizon Media DSP evaluation; results are system-specific.
 
 ### Next Best Action
 
 - [Pega Customer Decision Hub](https://www.pega.com/products/decision-hub) — Reference architecture for enterprise NBA.
-- [Contextual Bandits at Netflix](https://research.netflix.com/research-area/recommendations) — Artwork personalization, a widely-cited bandit case in production.
-- [Uber Engineering Blog — AI & ML](https://www.uber.com/blog/engineering/ai/) — Uber engineering's AI/ML category, including production NBA, bandits, and personalization systems.
+- [Artwork Personalization at Netflix](https://netflixtechblog.com/artwork-personalization-c589f074ad76) — 2017 engineering account of contextual-bandit artwork selection; an application-specific production reference.
+- [Uber Engineering Blog — AI & ML](https://www.uber.com/blog/engineering/ai/) — Discovery portal for AI/ML engineering articles; cite individual articles for deployment claims.
 
 ### Budget and Audience Allocation
 
-Allocation typically derives jointly from MMM (see Measurement) and uplift targeting (see Intelligence). Tooling listed here covers the optimization step.
+Channel-budget optimization may use experimentally calibrated MMM response curves; customer-level targeting may use uplift evidence. They operate at different units and need compatible objectives and assumptions. Tooling below includes aggregate modeling and budget optimization.
 
 - [Robyn](https://facebookexperimental.github.io/Robyn/) — Meta open-source MMM with budget optimizer.
-- [LightweightMMM](https://github.com/google/lightweight_mmm) — Google's Bayesian MMM for budget reallocation.
+- [Meridian](https://developers.google.com/meridian/docs/basics/meridian-introduction) — Google open-source Bayesian MMM with response curves, uncertainty and constrained budget optimization; causal interpretation depends on assumptions.
 
 ## Activation Layer
 
-The channels and surfaces through which decisions reach users: paid media, CRM, push, on-site, and increasingly conversational. The autonomous decisioning *inside* the major paid surfaces (walled gardens and aggregator networks) is covered in Part II as Class 1; independent agent products operating across surfaces are Class 2; in-conversation service agents are Class 3; the emerging AI-mediated discovery surface is Class 4.
+Channels through which chosen actions reach customers. Products may also learn policies or choose actions internally; the layer describes responsibility, not an exclusive vendor category. See [agent forms](#four-forms-of-marketing-agents).
+
+**Action contract:** define eligible customer/offer/order states, consent, frequency, inventory, permissions, spend limits, idempotency, safe retries, rollback and human escalation. Log actual exposure and failures separately from proposed actions.
 
 ### Paid Media Surfaces
 
-The major buying surfaces are Google Ads, Meta Ads, Amazon Ads, TikTok Ads, retail-media networks (Walmart, Target, Instacart), and the open programmatic ecosystem (DSPs, SSPs, exchanges). Each ships with built-in automated decisioning. See [Four Classes of Marketing Agents](#four-classes-of-marketing-agents) in Part II for the agent treatment.
+The major buying surfaces are Google Ads, Meta Ads, Amazon Ads, TikTok Ads, retail-media networks (Walmart, Target, Instacart), and the open programmatic ecosystem (DSPs, SSPs, exchanges). Each ships with built-in automated decisioning. See the agent forms in Part II for control points and evidence boundaries.
 
 ### CRM and Lifecycle Messaging
 
@@ -246,7 +281,7 @@ The major buying surfaces are Google Ads, Meta Ads, Amazon Ads, TikTok Ads, reta
 - [Braze (BrazeAI)](https://www.braze.com/product/brazeai) — BrazeAI (formerly Sage AI) for AI-driven personalization and journey optimization.
 - [Customer.io](https://customer.io/) — Developer-friendly lifecycle messaging.
 - [OneSignal](https://onesignal.com/) — Push and in-app messaging.
-- [BulkPublish](https://github.com/azeemkafridi/bulkpublish-api) — API and AI-agent skills for planning, adapting, reviewing, scheduling, and publishing social media content across channels.
+- [BulkPublish](https://github.com/azeemkafridi/bulkpublish-api) — Public SDKs, API specification, MCP server and agent skills for drafting, scheduling and publishing social posts through a hosted service; connected accounts and credentials required. Source/vendor capability reference, with unverified business effects; [source review](docs/community-resource-reviews.md#bulkpublish), 2026-09-30.
 
 ### Creative Production and DCO
 
@@ -268,21 +303,24 @@ How the system knows whether activation worked: experimentation, incrementality,
 ### Switchback and Geo-Experiments
 
 - [Switchback Experiments at Lyft](https://eng.lyft.com/experimentation-in-a-ridesharing-marketplace-b39db027a66e) — Marketplace-aware experimental design.
-- [CausalImpact (Synthetic Control for Geo-Experiments)](https://research.google/pubs/inferring-causal-impact-using-bayesian-structural-time-series-models/) — Google's Bayesian structural time-series approach.
+- [CausalImpact (Bayesian Structural Time Series)](https://research.google/pubs/inferring-causal-impact-using-bayesian-structural-time-series-models/) — Google's Bayesian structural time-series approach.
 
 ### Incrementality
+
+Related demo: [Incrementality Measurement](demos/incrementality-measurement/) connects evidence to conditional decisions using public cases, synthetic scenarios and a reproducible randomized-user analysis.
 
 - [Incrementality, Bidding, and Attribution](https://research.facebook.com/publications/incrementality-bidding-and-attribution/) — Meta's case for incrementality testing over multi-touch attribution.
 
 ### Marketing Mix Modeling
 
 - [Robyn](https://facebookexperimental.github.io/Robyn/) — Meta, open-source automated MMM.
-- [LightweightMMM](https://github.com/google/lightweight_mmm) — Google, Bayesian MMM.
+- [Meridian](https://developers.google.com/meridian/docs/basics/meridian-introduction) — Google Bayesian MMM; experiment-informed priors, lag/saturation modeling and posterior uncertainty.
+- [LightweightMMM](https://github.com/google/lightweight_mmm) — Historical resource; unsupported since the Meridian transition announced 2025-01-29.
 - [PyMC-Marketing MMM](https://www.pymc-marketing.io/) — PyMC-Labs, Bayesian MMM with explicit priors.
 
 ### Attribution
 
-Attribution is increasingly treated as a complement to — rather than substitute for — incrementality and MMM. The post-cookie environment has accelerated this shift.
+Attribution assigns credit under a chosen rule or model. Use it for reporting and diagnostics; identifying incremental effects requires a suitable experiment or defensible causal assumptions. MMM is also assumption-dependent and is not automatically causal.
 
 ## Platforms and MLOps
 
@@ -290,7 +328,7 @@ The substrate that runs across every layer above: feature stores, ML platforms, 
 
 ### Feature Stores
 
-- [Feast](https://github.com/feast-dev/feast) — Open-source feature store; default in many marketing ML stacks.
+- [Feast](https://github.com/feast-dev/feast) — Open-source feature store for training/serving consistency.
 - [Tecton](https://www.tecton.ai/) — Commercial feature platform with real-time path.
 
 ### ML Platforms
@@ -300,151 +338,154 @@ The substrate that runs across every layer above: feature stores, ML platforms, 
 
 ### Governance
 
-Data governance, model governance, and consent state management increasingly form a distinct sub-discipline as regulators tighten and clean rooms become primary measurement substrate. Tooling is fragmented; the operational pattern is typically a combination of warehouse-native controls (BigQuery / Snowflake) and a dedicated consent platform (OneTrust, Sourcepoint, Didomi).
+Record data lineage, allowed use, consent, deletion, access controls and model/policy versions across the stack. Warehouse controls and dedicated consent products can support this responsibility. Clean rooms limit data access; they do not automatically remove confounding or establish incremental impact.
 
 ---
 
 # Part II — The Agent Era
 
-The new vertical layer that cuts across the Stack: marketing agents in production, the four classes that distinguish them, and the points where LLM reasoning is structurally advantaged.
+Agents and workflows can connect responsibilities across the stack. Their ecosystem position, technical mechanism and delegated authority must be described separately.
 
-## Four Classes of Marketing Agents
+## Four Forms of Marketing Agents
 
 <div align="center">
-<img src="assets/marketing-agent-classes.png" alt="Four Classes of Marketing Agents" width="780">
+<a href="assets/marketing-agent-classes.png"><img src="assets/marketing-agent-classes.png" alt="Four forms of marketing agents: platform automation, independent cross-surface agents, conversational/service agents and agent-mediated discovery; lifecycle decisioning and system descriptors span forms" width="1200"></a>
 </div>
 
-"Marketing AI Agent" is applied to four operationally distinct kinds of system. They are not a linear hierarchy — they are categorical classes, distinguished primarily by *where the agent operates in the marketing ecosystem*. Maturity (incumbent, scaled, PMF, early) is a secondary axis that varies within each class. A long-form treatment, including the buyer-side vs supply-side asymmetry, take-rate economics, and the Chinese-vs-US ecosystem comparison, is in [`think/marketing-agent-classes.md`](think/marketing-agent-classes.md).
+The original four categories are retained as **typical operational forms**: platform-owned automation, independent cross-surface agents, conversational/service agents and agent-mediated discovery. They describe ecosystem positions and workflows, and can overlap. A product can operate across channels, interact with customers and support discovery simultaneously. Record customer, task, data access, action control, technical mechanism, autonomy and evidence/maturity independently. See the [English essay](think/marketing-agent-classes.md) and [Chinese version](think/marketing-agent-classes.zh.md).
 
-### Class 1 — Platform-Owned Automation
+### Form 1 — Platform-Owned Automation
 
-Autonomous bidding, creative selection, audience expansion, and pacing built into ad surfaces that own (or aggregate) their own supply. Ships as part of the buying interface; advertisers do not deploy it as a separate product. Built on traditional ML (deep CTR/CVR models, RL bidders, multi-armed bandits); LLMs limited to creative generation. Class 1 manages the majority of global digital ad spend.
+Automation inside an ad buying surface. Distinguish specific businesses that own user attention from businesses aggregating third-party supply; large groups may do both. Product descriptions below are navigation, not proof of causal performance.
 
-**Class 1a — Walled-Garden Platforms** (own end-user attention)
+**Owned attention:**
 
-- [Google Performance Max / Smart Bidding](https://ads.google.com/home/campaigns/performance-max/) — Cross-channel automated campaign type inside Google Ads.
-- [Meta Advantage+](https://www.facebook.com/business/ads/meta-advantage-plus) — Automated audience, creative, and placement across Meta surfaces.
-- [Amazon Sponsored / DSP Automated Bidding](https://advertising.amazon.com/) — Retail-media equivalent.
-- [TikTok Smart+](https://ads.tiktok.com/business/en-US/blog/smart-plus-ai-powered-ad-solution) — TikTok's answer to PMax/Advantage+.
+- [Google Performance Max / Smart Bidding](https://ads.google.com/home/campaigns/performance-max/) — Automated campaigns inside Google Ads.
+- [Meta Advantage+](https://www.facebook.com/business/ads/meta-advantage-plus) — Automated campaign capabilities inside Meta surfaces.
+- [Amazon Advertising](https://advertising.amazon.com/) — Sponsored advertising and DSP buying capabilities.
+- [TikTok Smart+](https://ads.tiktok.com/business/en-US/blog/smart-plus-ai-powered-ad-solution) — TikTok campaign automation.
+- [Tencent Ads](https://e.qq.com/) — Tencent-owned app inventory belongs here; external supply should be documented separately.
+- [Alibaba Mama](https://www.alimama.com/) — Alibaba-owned commerce inventory belongs here; external-network business needs separate analysis.
 
-**Class 1b — Aggregator-Network Platforms** (aggregate third-party supply)
+**Aggregated supply and buying infrastructure:**
 
-- [AppLovin (AXON 2.0)](https://www.applovin.com/axon/) — Autonomous ML targeting and bidding inside AppLovin's owned mobile ad network. AXON 2.0 shipped in 2023 and is associated with AppLovin's subsequent revenue and market-cap re-rating.
-- [Moloco](https://www.moloco.com/) — ML-driven ad platform for mobile UA and retail-media DSPs; technical reputation comparable to AppLovin in its segments.
-- [Mobvista / Mintegral](https://www.mobvista.com/) — HK-listed; programmatic ad network with global SSP/DSP infrastructure, strong in Chinese mobile-app outbound.
-- [Tencent Ads (腾讯广告)](https://e.qq.com/) — Autonomous ranking and bidding inside the Tencent superapp surface (WeChat, video, news, games).
-- [Alibaba Mama (阿里妈妈)](https://www.alimama.com/) — The same pattern inside Alibaba's e-commerce ad surface.
-- [Criteo](https://www.criteo.com/) — Long-running retargeting DSP, historically structured as a network.
-- [The Trade Desk](https://www.thetradedesk.com/) — Borderline 1a/1b; independent DSP that matches across exchanges without owning supply, but operates with the same autonomous-buying-surface logic.
+- [AppLovin](https://www.applovin.com/axon/) — Mobile-ad network and buying optimization reference.
+- [Moloco](https://www.moloco.com/) — ML-based buying and retail-media infrastructure.
+- [Mobvista / Mintegral](https://www.mobvista.com/) — Programmatic network and SSP/DSP infrastructure reference.
+- [Criteo](https://www.criteo.com/) — Commerce-media and retargeting infrastructure reference.
+- [The Trade Desk](https://www.thetradedesk.com/) — Independent DSP with buying control across exchanges; also fits independent orchestration.
 
-The 1a vs 1b distinction matters because economic moats differ: walled gardens own user attention end-to-end and capture the value of automation directly, while aggregator networks must split value with third-party publishers, which limits pricing power but extends reach. Class 1b is nonetheless one of the most profitable corners of the taxonomy — see the long-form essay for why.
+Supply control and data access are potential advantages, not a profitability ranking. Compare gross versus net revenue, publisher payments, margins, retention and operating costs before drawing economic conclusions.
 
-### Class 2 — Independent Cross-Surface Agents
+### Form 2 — Independent Cross-Surface Agents
 
-External agent products sold to brands and agencies. Operate across multiple Class 1 surfaces (Google, Meta, TikTok, retail media, programmatic) without owning supply. Tech substrate varies: scaled players are typically hybrid (traditional ML + LLM creative); early players are typically LLM-native.
+External products integrating channels, business objectives and creative/operational workflows. Listed capability is public product positioning; quantitative outcomes require separate dated evidence and a baseline.
 
-- [Albert.ai](https://albert.ai/) — One of the earliest autonomous ad agents (originally Adgorithms). Cross-surface management across Google, Meta, and YouTube. Disclosed case: Harley-Davidson reported 5× traffic and a 2,930% monthly lead lift after deployment.
-- [Ryze AI](https://ryze.ai/) — $500M+ ad spend managed across 2,000+ marketers in 23 countries. Reported customer outcome: 3.8× ROAS within 6 weeks.
-- [Jellyfish](https://www.jellyfish.com/) — Agency that replaced parts of its human media-buying team with AI bots. 65% reduction in campaign launch time; for M&S, 80% faster content delivery and 30% cost reduction.
-- [Muze AI](https://muzeai.com/) — YC-backed; positioned to replace $10K–$15K/month agency retainers. 85–90% autonomous; on the Shopify App Store with paying customers.
-- [Uplane](https://www.ycombinator.com/companies/uplane) — YC 2026; profit-aware agency replacement, connects to CRM and ERP to optimize on profit rather than clicks.
-- [Absurd](https://www.ycombinator.com/companies/absurd) — YC 2026; full-stack AI video advertising. Kalshi's "Election Day" spot exceeded a million views.
+- [Albert.ai](https://albert.ai/) — Cross-channel advertising automation reference.
+- [Ryze AI](https://ryze.ai/) — Advertising operations and optimization reference.
+- [Jellyfish](https://www.jellyfish.com/) — Agency workflows and marketing operations reference.
+- [Muze AI](https://muzeai.com/) — Advertising automation product reference.
+- [Uplane](https://www.ycombinator.com/companies/uplane) — YC profile describes business-outcome-oriented marketing automation.
+- [Absurd](https://www.ycombinator.com/companies/absurd) — AI creative/video advertising product reference.
+- [Lapis](https://www.ycombinator.com/companies/lapis) — Current YC profile describes advertising creation and operation; earlier launch material describes AI-search analytics. Reviewed 2026-09-30; no supported claim of native ChatGPT ad placement.
 
-### Class 3 — Conversational and Service Agents
+### Form 3 — Conversational & Service Agents
 
-LLM-native agents operating in the post-click conversation: customer support, sales conversations, retention dialogue. Optimize conversation turns and resolution outcomes rather than impressions. This is the class where LLM reasoning is the core product, not a peripheral feature. Economics resemble enterprise SaaS (per-seat, per-resolution) rather than ad take-rate.
+Customer service, sales and proactive relationships can span conversations and time. Resolution, task correctness and incremental customer value need separate evaluation.
 
-- [Sierra](https://sierra.ai/) — $100M ARR within 7 quarters of founding; co-founded by Bret Taylor (ex-Salesforce CEO).
-- [Decagon](https://decagon.ai/) — AI agents for customer support; significant fintech and consumer-brand traction.
-- [Intercom Fin](https://www.intercom.com/fin) — Intercom's autonomous customer-service agent; deployed across Intercom's SaaS customer base since 2023.
-- [Cresta](https://cresta.com/) — Real-time agent assist plus autonomous agents for sales and support conversations.
-- [Ada](https://www.ada.cx/) — Customer service automation; early LLM-native pivot in the category.
-- [Cognigy](https://www.cognigy.com/) — Enterprise conversational AI platform for contact centers; strong European enterprise traction.
-- [Parloa](https://www.parloa.com/) — European conversational AI for contact centers.
+- [Sierra Horizon](https://sierra.ai/blog/horizon) — Vendor announcement dated 2026-07-16 describes proactive, long-horizon customer interactions; capability evidence does not prove business lift.
+- [Decagon](https://decagon.ai/) — Customer-interaction agent reference.
+- [Intercom Fin](https://www.intercom.com/fin) — Customer-service agent reference.
+- [Cresta](https://cresta.com/) — Agent assistance and customer-interaction automation.
+- [Ada](https://www.ada.cx/) — Customer-service automation reference.
+- [Cognigy](https://www.cognigy.com/) — Contact-center conversational platform reference.
+- [Parloa](https://www.parloa.com/) — Contact-center conversational platform reference.
+- [Hermes](https://www.buildwithhermes.com/integrations) — Vendor-described voice-agent platform for agencies, combining voice providers, CRM and per-client billing; private-beta product reference, with unverified deployment and business effects; [source review](docs/community-resource-reviews.md#hermes), 2026-09-30.
 
-### Class 4 — Agent-Mediated Discovery (Frontier)
+### Form 4 — Agent-Mediated Discovery
 
-The newest class. Targets the AI agents that increasingly mediate human purchase decisions — ChatGPT, Claude, Perplexity, vertical buying agents — rather than human end-users directly. No disclosed scale yet; the thesis is structural. Two sub-categories are forming:
+Keep **answer visibility (GEO/AEO), human-facing ads in AI interfaces, agent-assisted purchases, and structured agent-to-agent exchanges** separate. Their audiences, permissions and evaluation methods differ.
 
-**Class 4a — GEO / AEO platforms** (measure and improve brand visibility inside LLM answers)
+- [Profound](https://www.tryprofound.com/) — AI-answer visibility product reference; mentions are not purchases.
+- [Daydream](https://withdaydream.com/) — Search/content optimization reference; evaluate its specific workflow before assigning an AI-commerce role.
+- [Scrunch AI](https://www.scrunchai.com/) — AI-discovery analysis and optimization reference.
+- [Sitefire](https://www.ycombinator.com/companies/sitefire) — YC profile describes visibility analysis, content optimization and CMS actions, not paid AI-channel placement; reviewed 2026-09-30.
 
-- [Profound](https://www.tryprofound.com/) — Tracks brand mentions and recommendations across ChatGPT, Perplexity, Gemini, and Google AI Overviews; widely cited as the category-defining product.
-- [Daydream](https://withdaydream.com/) — GEO platform focused on making brand catalogs and content discoverable to AI buying agents.
-- [Scrunch AI](https://www.scrunchai.com/) — Analytics for how brands appear in LLM-generated responses across major answer engines.
+Discovery shifts are hypotheses to track, not proof that SEO/SEM must be entirely rewritten or that a category has no scale. Sample a defined query distribution repeatedly, record model/version, and connect visibility to qualified demand with an appropriate evaluation.
 
-**Class 4b — AI-channel ad placement** (buying media inside AI-agent surfaces)
+## Lifecycle Decisioning
 
-- [Lapis](https://www.ycombinator.com/companies/lapis) — Native ad placement inside ChatGPT; pioneering a new buying surface.
-- [sitefire](https://www.ycombinator.com/companies/sitefire) — *Agent SEO*: making products legible and recommendable to AI agents at the schema/feed level.
+First-party activation, retention, renewal and reactivation deserve explicit attention. Choose whether to contact, channel, time, frequency and offer under eligibility and consent constraints, then measure incremental long-term contribution and negative feedback.
 
-As AI agents intermediate more commerce decisions, the SEO/SEM stack must be rewritten. The category is largely empty; LLM understanding is the core weapon.
+- [BrazeAI Decisioning Studio](https://www.braze.com/product/brazeai-decisioning-studio) — Official documentation describes first-party data, custom KPIs, channel/incentive/frequency decisions and constraints; reviewed 2026-09-30. This spans several stack responsibilities and operational forms; vendor-described functionality is not independent efficacy evidence.
+- [Hightouch AI Decisioning](https://hightouch.com/docs/ai-decisioning/overview) — Official documentation describes reinforcement-learning-based message/channel/timing decisions and connected delivery; reviewed 2026-09-30. The product’s agent terminology does not establish LLM-directed planning or general incremental lift.
+- [Lifecycle Activation and Retention Playbook](playbooks/lifecycle-activation.md) — Rule baseline, no-contact control, eligibility, delayed outcomes and execution constraints.
 
 ## LLM Agent Leverage Points
 
-Most Class 1 and Class 2 systems are built on traditional ML (gradient boosting, multi-armed bandits, RL bidders), with LLMs limited to creative generation. The optimization loop they run is high-frequency, low-latency, and data-dense, which rewards classical ML over LLM reasoning. LLM reasoning is structurally advantaged in three places:
+Context-heavy strategy, creative iteration and tool-mediated customer work are plausible LLM use cases. Compare with fixed workflows, rules and human processes; measure quality, cost, latency and incremental value. Ecosystem position does not establish whether a product uses classical ML, LLMs or both.
 
-1. **Strategy layer.** Channel mix, market-entry decisions, brand positioning, budget allocation across portfolios. Business-context reasoning rather than per-impression optimization. Class 2 players targeting this layer (Uplane is the clearest example) have a defensible thesis.
-2. **End-to-end creative chain.** Market insight → creative strategy → copy/visual/video → A/B reading → iterative refinement, run coherently as a single loop rather than as isolated generation steps.
-3. **Agent-to-Agent marketing.** Class 4 in its entirety — as AI agents mediate more buying decisions, the SEO/SEM stack must be rewritten.
+**Two evaluation tracks:** (1) facts, policy compliance, tool correctness, idempotency, authorization and handoff; (2) incremental qualified sales, retention or contribution, with opt-outs, complaints and refunds. Commercial scale, task success and causal improvement cannot substitute for one another.
 
 ## Agent-Building Frameworks
 
 - [LangGraph](https://github.com/langchain-ai/langgraph) — Graph-based agent orchestration; common substrate for multi-step marketing agents.
-- [Claude Agent SDK](https://docs.anthropic.com/en/docs/agents-and-tools/agent-sdk) — Anthropic's SDK for building tool-using agents; well-suited to strategy reasoning and creative chains.
-- [OpenAI Assistants and Responses API](https://platform.openai.com/docs/assistants/overview) — Default for prototyping marketing agents on the GPT stack.
+- [Claude Agent SDK](https://code.claude.com/docs/en/agent-sdk/overview) — Anthropic's SDK for tool-using agents; choose permissions and evaluations for the intended workflow.
+- [OpenAI Responses API](https://developers.openai.com/api/docs/guides/migrate-to-responses) — Current agent/tool integration entry point, with Conversations for persistent state; Assistants API sunset 2026-08-26 per the [official migration guide](https://developers.openai.com/api/docs/assistants/migration). Reviewed 2026-09-30.
 - [CrewAI](https://github.com/crewAIInc/crewAI) — Multi-agent role-based orchestration framework.
+- [NotFair Plugin](https://github.com/nowork-studio/notfair-plugin) — MIT-licensed marketing skills for ads, GA4 and Search Console; live account operations depend on an OAuth-connected hosted MCP. Skills/tool integration reference, with unverified business effects; [source review](docs/community-resource-reviews.md#notfair-plugin), 2026-09-30.
 
 ## Frontier (2025/2026)
 
-Cross-stack trends reshaping multiple layers of the Martech AI Stack at once. Agent-class-specific frontiers (e.g., Class 3 expanding into sales conversations, Class 4 product activity) are covered within their respective classes above; this section focuses on shifts that do not map cleanly to a single agent species.
+Research questions that cut across responsibilities. Dates describe the review horizon, not a guaranteed adoption forecast.
 
-### Privacy-First Measurement
+### Privacy and Measurement
 
-Post-cookie, post-IDFA. The revival of MMM, incrementality testing, geo-experiments, and clean rooms as primary measurement substrate. Reshapes the Measurement Layer and the Data Layer simultaneously; affects attribution economics across every agent class. Tooling under the [Measurement Layer](#measurement-layer) and [Data Layer](#data-layer).
+Consent changes and limits on identifiers motivate experiments, aggregate models and controlled data collaboration. Clean rooms constrain access; they do not remove confounding. See Data and Measurement.
 
-### Foundation Models on Tabular CDP Data
+### Foundation Models on Customer Data
 
-Pretrained transformers on event streams and customer behavior — early but accelerating. Watch TabPFN, customer-sequence models analogous to SASRec/BERT4Rec generalized to full CDP event data. Sits in the Intelligence Layer; will change what every downstream class can do with user representations.
+Tabular and sequence models may reduce modeling effort, but customer-event transfer, calibration and decision value must be validated on representative data. Compare with simple tabular baselines before adopting a foundation model.
 
-### AI4AI for Growth
+### AI-Assisted Experimentation
 
-LLM agents that write the experiments, generate the audiences, and propose the creative tests — automating the *inner loop* of growth itself, not just the execution. Cuts across Intelligence + Decision + Measurement layers. Most YC 2026 marketing-AI cohort entries are bets on some version of this thesis.
+Agents can draft hypotheses, check contracts and prepare creative tests. Keep randomization, estimands, exclusions, analysis code and approvals auditable; automated experiment generation can create multiple-testing and selection problems.
 
-### Agent-to-Agent Marketing
+### Discovery and Agent Commerce
 
-The structural shift behind Class 4. As AI agents (ChatGPT, Claude, Perplexity, vertical buying assistants) intermediate more consumer purchase decisions, the *audience* of marketing changes from human to agent. Consequences span every layer:
-
-- **Data:** product information must become structured and agent-readable; the schema-and-feed renaissance.
-- **Intelligence:** embeddings and retrieval must be tuned for agent queries, not human keywords.
-- **Decision:** the SEO/SEM stack — built on a human-attention model of search — needs rewriting for an audience that does not click.
-- **Activation:** new surfaces emerge (placement inside ChatGPT, recommendation inside vertical agents); existing surfaces (search, social) lose intermediation share.
-- **Measurement:** attribution to an agent-mediated purchase is a different problem from attribution to a human-mediated one.
-
-This is bigger than the products listed under Class 4 — it is the largest structural reorientation of the marketing stack since mobile and post-cookie measurement, and it is still mostly upstream of disclosed traction.
+Structured product data, citations, AI-interface ads and authorized purchases create different opportunities. Distinguish observed capabilities from hypotheses about displacement and agent-to-agent markets. Measure consent, task completion, transaction errors and incremental business value separately.
 
 ---
 
 # Part III — Applied and References
 
+## Interactive Demos
+
+- [Incrementality Measurement Demo](demos/incrementality-measurement/) — English interactive learning prototype: public evidence, NOVA scenario branches, experiment feasibility, auditable budget comparisons and a reproducible synthetic randomized-user analysis. No live integrations or advertising execution.
+
 ## Industry Playbooks
 
-Production case studies and engineering write-ups from companies running Martech AI at scale. Each entry tagged with the primary cross-layer domain it speaks to (UI = User Intelligence, AS = Advertising Systems, GE = Growth Engine).
+These are implementation guides, not claims of deployments by named companies. Each connects a business question to data, a baseline, method conditions, execution constraints, evaluation and failure criteria.
 
-- [Meta — Customer Lifetime Value Guide](https://www.facebook.com/business/help/1730784113851988) — Meta's official documentation on pLTV in ad ranking. *[UI, AS]*
-- [Alibaba — Deep Interest Network in Display Advertising](https://arxiv.org/abs/1706.06978) — The DIN family in production for years. *[AS]*
-- [Tencent — Hierarchical Recommendation and Crowd Algorithms](https://www.atatech.org/) — Tencent's ad and growth stack. *[UI, AS]*
-- [Uber Eats — Causal Inference for Pricing and Promotions](https://www.uber.com/blog/causal-inference-at-uber/) — Heterogeneous treatment effects in marketplace pricing. *[GE]*
-- [LinkedIn — Experimentation Platform and Causal Methods](https://engineering.linkedin.com/blog/topic/a-b-testing) — LinkedIn's experimentation engineering blog. *[GE]*
-- [Meituan — User Growth System](https://tech.meituan.com/) — NBA, ranking, and growth experimentation. *[UI, GE]*
-- [Beike (KE Holdings) — Intelligent Advertising](https://www.ke.com/) — Real-estate-vertical ad optimization. *[AS]*
-- [NIO — Agent and Decision Intelligence in Auto Retail](https://www.nio.com/) — Agent and decision-intelligence stack for automotive marketing. *[GE]*
+- [Lifecycle Activation and Retention](playbooks/lifecycle-activation.md) — Eligibility, no-contact controls, frequency, incremental contribution and delayed negative outcomes.
+- [Conversational Sales and Service](playbooks/conversational-sales.md) — Customer state, authorized actions, handoff and separate task/business evaluations.
+- [Cross-Channel Resource Allocation](playbooks/cross-channel-allocation.md) — Experiment/MMM roles, marginal response, uncertainty and staged budget execution.
+
+### Production Research and Case Evidence
+
+- [Google — Ad Click Prediction: a View from the Trenches](https://research.google/pubs/ad-click-prediction-a-view-from-the-trenches/) — KDD 2013 production CTR engineering; prediction quality is not intervention effectiveness.
+- [Alibaba — Deep Interest Network](https://arxiv.org/abs/1706.06978) — Published ranking architecture and deployment discussion; evaluate targeting policies separately.
+- [eBay — Paid Search Field Experiments](https://faculty.haas.berkeley.edu/stadelis/BNT_ECMA_rev.pdf) — Historical experiments distinguish intent from causal search-ad effects; effect sizes are context-specific.
+- [Airbnb — 2020 Form 10-K](https://www.sec.gov/Archives/edgar/data/1559720/000155972021000010/airbnb-10k.htm) — Filed marketing expenditures and strategy, not a randomized estimate of channel return; see the Demo's [source ledger](demos/incrementality-measurement/sources.md).
+
+Engineering portals such as [Uber](https://www.uber.com/blog/engineering/ai/) and [Meituan](https://tech.meituan.com/) are discovery starting points. Cite a specific article before attributing architecture or effects to a company. A company homepage alone does not establish a deployment case.
 
 ## Original Research and Notes
 
 Long-form analyses written for this repository.
 
-- [Four Classes of Marketing Agents](think/marketing-agent-classes.md) — A categorical taxonomy (Platform-Owned / Independent / Conversational / Agent-Mediated) replacing the linear-tier framing. Covers the 1a/1b walled-garden vs aggregator-network split, why Class 1b is the most profitable corner, and the Chinese-vs-US ecosystem asymmetry. ([中文版 / Chinese version](think/marketing-agent-classes.zh.md))
-- [The Five Layers as a Cognitive Cycle](think/five-layers-cognitive-cycle.md) — How Data, Intelligence, Decision, Activation, and Measurement decompose the Martech AI feedback loop into independently optimizable stages, and what gets broken when layer boundaries collapse. ([中文版 / Chinese version](think/five-layers-cognitive-cycle.zh.md))
+- [Four Forms of Marketing Agents](think/marketing-agent-classes.md) — Operational positions, control points and workflows with independent descriptors for customer, task, data, control, technology, autonomy and evidence; economic advantages are hypotheses to test. ([中文版 / Chinese version](think/marketing-agent-classes.zh.md))
+- [The Five Layers as a Decision and Learning Cycle](think/five-layers-cognitive-cycle.md) — Functional responsibilities, provenance, action contracts and evidence with uncertainty; explains why logged feedback alone does not establish causal learning. ([中文版 / Chinese version](think/five-layers-cognitive-cycle.zh.md))
 
 ## Books
 
@@ -458,8 +499,8 @@ Long-form analyses written for this repository.
 
 ### Foundational
 
-- [Causal Inference and Stable Unit Treatment Value Assumption](https://www.jstor.org/stable/2289064) — Rubin's foundational potential outcomes paper.
-- [The Predictron](https://arxiv.org/abs/1612.08810) — DeepMind on end-to-end value prediction, relevant for pacing.
+- [Estimating Causal Effects of Treatments in Randomized and Nonrandomized Studies](https://doi.org/10.1037/h0037350) — Rubin (1974), a foundational treatment-effect reference; identification assumptions must match the application.
+- [The Predictron](https://arxiv.org/abs/1612.08810) — DeepMind research on learned internal models for value prediction; a conceptual RL reference, not a demonstrated ad-pacing deployment.
 
 ### Recommender Systems
 
@@ -471,7 +512,7 @@ See [leoncuhk/recsys-papers](https://github.com/leoncuhk/recsys-papers) for a ma
 
 ### LLM Agents for Marketing (emerging)
 
-- [Generative Agents: Interactive Simulacra of Human Behavior](https://arxiv.org/abs/2304.03442) — Substrate for several conversational-marketing agents.
+- [Generative Agents: Interactive Simulacra of Human Behavior](https://arxiv.org/abs/2304.03442) — Research on simulated interactive characters; not evidence of a deployed marketing agent or incremental sales.
 - [AgentBench](https://arxiv.org/abs/2308.03688) — Benchmarking agent capabilities; useful for agent evaluation in marketing tasks.
 
 ## Community and Conferences
@@ -484,7 +525,7 @@ See [leoncuhk/recsys-papers](https://github.com/leoncuhk/recsys-papers) for a ma
 
 ### Conferences
 
-- [The MarTech Conference](https://martechconf.com/), [Lifecycle Marketing Summit](https://www.iterable.com/activate/), [Affiliate Summit](https://www.affiliatesummit.com/), [KDD Workshop on AI for Online Advertising](https://www.kdd.org/).
+- [The MarTech Conference](https://martechconf.com/), [Iterable Activate](https://www.iterable.com/activate/), [Affiliate Summit](https://www.affiliatesummit.com/), [ACM SIGKDD](https://www.kdd.org/).
 
 ## Related Lists
 
@@ -495,13 +536,13 @@ See [leoncuhk/recsys-papers](https://github.com/leoncuhk/recsys-papers) for a ma
 
 ## Contributing
 
-Contributions are welcome. This list is **curated, not comprehensive** — additions should clear the bar set by existing entries: shipped at scale, published research, or a perspective that changes how a practitioner should think.
+Contributions are welcome. This list is **curated, not comprehensive**. Additions need substantive relevance and claim-matched evidence; product capability, implementation, traction and causal impact are reviewed separately.
 
 - Prefer open source, published work, or systems with disclosed traction.
 - Disclose affiliation if you built it.
-- One PR per resource; format: `- [Name](url) — One-sentence description ending with a period.`
+- One PR per resource or tightly related batch; format: `- [Name](url) — One-sentence description ending with a period.`
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for the full guidelines.
+Include direct sources, evidence type, limitations and a review date for material claims. See [CONTRIBUTING.md](CONTRIBUTING.md) for the full guidelines.
 
 ---
 

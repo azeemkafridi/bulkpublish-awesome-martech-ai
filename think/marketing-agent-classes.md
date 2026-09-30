@@ -1,144 +1,96 @@
-# Four Classes of Marketing Agents
+# Four Forms of Marketing Agents
 
 *[中文版 / Chinese version](marketing-agent-classes.zh.md)*
 
-The term "Marketing AI Agent" is applied in 2025–2026 to four operationally distinct kinds of system. Conflating them produces unreliable investment theses and unreliable product theses. This essay separates them into four **categorical classes** — distinguished by where the agent operates, who its customer is, and what its economic model looks like — and explains where each makes money, what technology it actually runs on, and where LLM reasoning has structural leverage.
+Reviewed: 2026-09-30. The original four categories are retained as four **typical operational forms**. They describe where a system operates, its customer relationship and the actions it can control; the forms can overlap. Platform ownership, operating scope, interaction mode and discovery channel are different dimensions. A lifecycle product can be independent, conversational and proactive at the same time. None of these positions determines technical architecture, maturity or profitability.
 
-## How the four classes are distinguished
+## The operational logic
 
-The four classes are categorical, not ordinal. They are distinguished primarily by **where the agent sits in the marketing ecosystem**. Maturity (incumbent / scaled / PMF / early) is a secondary axis *within* each class, not a separate dimension.
-
-| Class | Position | Who pays | Economic model |
-|---|---|---|---|
-| 1 — Platform-Owned | Inside an ad surface that owns supply | Advertiser (via ad spend) | Margin on inventory; automation value captured by platform |
-| 2 — Independent | Outside any single surface, operating across them | Advertiser | SaaS or share of spend |
-| 3 — Conversational | In the post-click conversation | End-business (CX / sales) | Per-seat or per-resolution SaaS |
-| 4 — Agent-Mediated | In a new AI-buying-agent surface | Advertiser (frontier) | Speculative |
-
-## Class 1 — Platform-Owned Automation
-
-Autonomous bidding, creative selection, audience expansion, and pacing built into ad surfaces that own (or aggregate) their own supply. The agent ships as part of the buying interface; advertisers do not deploy it as a separate product. Built on traditional ML (deep CTR/CVR models, RL bidders, multi-armed bandits); LLMs are limited to creative generation.
-
-Two sub-types are worth distinguishing because their economic moats differ.
-
-**1a — Walled-Garden Platforms (own end-user attention)**
-
-- Google Performance Max / Smart Bidding
-- Meta Advantage+
-- Amazon Sponsored / DSP Automated Bidding
-- TikTok Smart+
-
-**1b — Aggregator-Network Platforms (aggregate third-party supply)**
-
-- AppLovin (AXON 2.0) — aggregates mobile-app inventory
-- Moloco — ML-driven ad platform serving mobile UA and retail-media DSPs; technical reputation comparable to AppLovin in its segments
-- Mobvista / Mintegral — same pattern, HK-listed, strong in Chinese outbound
-- Tencent Ads — autonomous ranking and bidding inside Tencent's superapp surface
-- Alibaba Mama — the same inside Alibaba's e-commerce surface
-- Criteo — historically a retargeting network; structurally similar
-- The Trade Desk — borderline; pure matcher without owned supply, but operates with the same autonomous-buying-surface logic
-
-The distinction matters: walled gardens own user attention end-to-end, so the value of the automation accrues to the platform; aggregator networks must split value with third-party publishers, which limits pricing power but extends reach.
-
-Class 1 manages the majority of global digital ad spend. The first question any external agent product must answer is *what does it do that Class 1 does not already do inside the buying surface*.
-
-## Class 2 — Independent Cross-Surface Agents
-
-External agent products sold to brands and agencies, operating across multiple Class 1 surfaces (Google, Meta, TikTok, retail media, programmatic) without owning supply. Tech substrate varies — scaled players are typically hybrid (traditional ML for optimization + LLM for creative); early players are typically LLM-native.
-
-**Scaled (disclosed traction):**
-
-- Albert.ai — one of the earliest autonomous ad agents (originally Adgorithms). Cross-surface management across Google, Meta, YouTube. Disclosed case: Harley-Davidson, 5× traffic, 2,930% monthly lead lift.
-- Ryze AI — $500M+ ad spend managed across 2,000+ marketers in 23 countries; reported 3.8× ROAS within 6 weeks.
-- Jellyfish — agency that replaced parts of human media-buying with AI. M&S case: 80% faster content delivery, 30% cost reduction.
-
-**Product-market fit, not yet scaled:**
-
-- Muze AI — YC-backed; agency-replacement positioning for Shopify SMBs; 85–90% autonomous; under 2-minute creative generation.
-
-**Early, unproven:**
-
-- Uplane (YC 2026) — profit-aware agency replacement; connects to CRM and ERP to optimize on profit, not clicks.
-- Absurd (YC 2026) — full-stack AI video advertising. Kalshi's "Election Day" spot exceeded a million views.
-
-The hybrid pattern (traditional ML core + LLM creative) is currently the winning configuration at scale, which constrains the LLM-native thesis to specific leverage points discussed below.
-
-## Class 3 — Conversational & Service Agents
-
-LLM-native agents operating in the post-click conversation: customer support, sales conversations, retention dialogue. Structurally different from Classes 1 and 2 because they do not optimize impressions — they optimize conversation turns and resolution outcomes. This is the class where LLM reasoning is the core product, not a peripheral feature.
-
-**Scaled:**
-
-- Sierra — $100M ARR within 7 quarters of founding; co-founded by Bret Taylor (ex-Salesforce CEO). The clearest existing proof that a marketing-adjacent agent business can scale through LLM reasoning alone.
-
-**Product-market fit, scaling:**
-
-- Decagon — AI agents for customer support; significant fintech and consumer-brand traction.
-- Intercom Fin — Intercom's autonomous customer-service agent, deployed across Intercom's SaaS customer base since 2023.
-- Cresta — real-time agent assist plus autonomous sales/support agents.
-- Ada — customer service automation; an early LLM-native pivot in the category.
-- Cognigy — enterprise conversational AI platform for contact centers; strong European enterprise traction.
-- Parloa — European conversational AI for contact centers.
-
-Economics resemble enterprise SaaS (per-seat, per-resolution) rather than ad take-rate.
-
-## Class 4 — Agent-Mediated Discovery (Frontier)
-
-The newest and most speculative class. Whereas Classes 1–3 all ultimately serve human end-users, Class 4 targets the AI agents that increasingly mediate human purchase decisions. ChatGPT, Claude, Perplexity, and vertical buying agents are becoming the audience. Two sub-categories are forming:
-
-**4a — GEO / AEO platforms** (Generative / Answer Engine Optimization — measure and improve brand presence inside LLM-generated answers):
-
-- Profound — tracks brand mentions and recommendations across ChatGPT, Perplexity, Gemini, and Google AI Overviews; widely cited as the category-defining product.
-- Daydream — GEO platform focused on making brand catalogs and content discoverable to AI buying agents.
-- Scrunch AI — analytics for how brands appear in LLM-generated responses across major answer engines.
-
-**4b — AI-channel ad placement** (buying media inside AI-agent surfaces):
-
-- Lapis — native ad placement inside ChatGPT; pioneering a new buying surface.
-- sitefire — *Agent SEO*: making products legible and recommendable to AI agents at the schema/feed level.
-
-No disclosed scale exists yet for any Class 4 entry. The thesis is structural: as AI agents intermediate more commerce decisions, the entire SEO/SEM stack must be rewritten. Class 4 is what comes next.
-
-## The axes that distinguish the four classes
-
-| Axis | Class 1 | Class 2 | Class 3 | Class 4 |
+| Form | Where it acts | Typical customer | Action control / workflow | Commercial model to verify |
 |---|---|---|---|---|
-| Where the agent operates | Inside an owned ad surface | Across surfaces, owns none | In conversation, post-click | In new AI-mediated surfaces |
-| Customer | Advertiser | Advertiser | End-business (CX / sales) | Advertiser (early) |
-| Tech substrate | Traditional ML | Hybrid (ML + LLM) | LLM-native | LLM-native |
-| Economics | Inventory margin | SaaS / % of spend | Enterprise SaaS | TBD |
-| Is LLM reasoning core? | No | No | Yes | Yes |
+| 1 — Platform-owned | Within an ad buying surface | Advertiser | Signals → bids/audiences/creative → delivery and feedback | Ad-spend-linked platform revenue; inventory relationships vary |
+| 2 — Independent cross-surface | Across external accounts and channels | Brand or agency | Business objective → cross-channel plan → API actions and approvals → evaluation | SaaS, services or spend-linked fees |
+| 3 — Conversational / service | Customer conversations and follow-up | CX, sales or lifecycle team | Intent/context → dialogue and tool actions → resolution, handoff or follow-up | Seats, usage, resolutions or enterprise contracts |
+| 4 — Agent-mediated discovery | AI answers, interfaces or commerce pathways | Brand or commerce team | Visibility/content or authorized commerce actions → channel-specific evaluation | Product-specific subscriptions, services or other models |
 
-Maturity is a secondary axis *within* each class — incumbent, scaled, PMF, early — not a separate class.
+These are practical entry points, rather than quadrants of a single two-axis taxonomy. A DSP can combine buying-surface control with independent orchestration. A customer agent can combine conversations with cross-channel lifecycle actions. The term “agent” is used broadly in this ecosystem; built-in optimization is not automatically an LLM agent.
 
-## Where LLM agents actually have leverage
+## Describe systems on independent dimensions
 
-The dominant Class 1 winners and most Class 2 winners are built on traditional ML, with LLMs limited to creative generation. The optimization loop they run is high-frequency, low-latency, and data-dense, which rewards classical ML over LLM reasoning. None of the major agent businesses to date are built primarily on Claude Code or pure Claude API.
+| Dimension | Questions to record |
+|---|---|
+| Customer | Who pays, who operates it, and whose interests does it optimize? |
+| Task | Acquisition, creative, activation, retention, service, sales or discovery? |
+| Data access | Platform signals, first-party customer records, public content or combinations? |
+| Action control | Inventory, bids, messages, incentives, transactions; on which surfaces? |
+| Technical mechanism | Rules, predictive ML, causal models, optimization, fixed workflows, LLM agents or hybrid? |
+| Autonomy | Suggest, draft, execute approved actions, or operate within delegated bounds? |
+| Evidence and maturity | What is disclosed, when, and with which baseline and limitations? |
 
-LLM reasoning is structurally advantaged in three places:
+Use the specific product and workflow as the unit of analysis. Do not classify an entire conglomerate from one business line. Unknown implementation details should remain unknown. [Anthropic's engineering account](https://www.anthropic.com/engineering/building-effective-agents) distinguishes predefined workflows from agents whose models dynamically direct tools and process; autonomous optimization alone does not establish LLM agency.
 
-1. **Strategy layer** — channel mix, market-entry decisions, brand positioning, budget allocation across portfolios. Business-context reasoning rather than per-impression optimization. Class 2 players targeting this layer (Uplane is the clearest example) have a defensible thesis.
-2. **End-to-end creative chain** — market insight → creative strategy → copy/visual/video → A/B reading → iterative refinement, run coherently as a single loop. This is where Class 2 hybrids hold their position.
-3. **Agent-to-Agent marketing** — Class 4 in its entirety. As AI agents intermediate more buying decisions, the SEO/SEM stack must be rewritten. The category is largely empty and LLM understanding is the core weapon.
+## Form 1 — Platform-Owned Automation
 
-## Why Class 1b is the most profitable corner
+A platform may choose bids, pacing, audiences or creative using its own buying interface. Distinguish **owned attention** from **aggregated third-party supply**, then record hybrids.
 
-Class 1b (aggregator-network platforms — AppLovin, Mintegral, Tencent Ads, Alibaba Mama, Criteo) is structurally the most profitable position in this taxonomy, for three reasons:
+- Google Ads, Meta Ads, Amazon Ads and TikTok Ads include platform automation.
+- Tencent's own WeChat and other app inventory, and Alibaba's own commerce inventory, belong to the owned-attention subtype. Their external-network businesses need separate records.
+- AppLovin, Mintegral and Criteo illustrate network or inventory-aggregation positions; specify the product and supply relationship.
+- Moloco provides ML-based buying and retail-media infrastructure. The Trade Desk is an independent DSP with buying control, not an owner of publisher attention; it can also be described under Form 2.
 
-1. **Take-rate economics.** They earn a percentage of every ad dollar flowing through their pipes. Volume × take-rate scales with the entire ad market, not with per-customer SaaS pricing.
-2. **Co-located algorithm and data.** Both the matching algorithm and the first-party programmatic data live inside the same company. Class 2 cannot replicate this — it must integrate with Class 1 surfaces from the outside and bring its own data.
-3. **Two-sided network effects.** More publishers attract more advertisers attract more publishers — the same structural moat as Class 1a walled gardens, in a different supply form.
+Control of inventory, auction signals and delivery may create advantages. It does not establish a universal profitability ranking. Different accounting treatments of gross spend, net revenue, publisher payments and acquisition costs make casual comparisons unreliable.
 
-This is why companies like AppLovin and Mobvista — companies that rarely appear in agent-narrative coverage — are some of the most profitable AI-driven businesses in marketing. They are AI-native by every reasonable functional definition. They simply do not market themselves as agents.
+## Form 2 — Independent Cross-Surface Agents
 
-## The Chinese ad-tech ecosystem
+External products can connect media accounts, first-party outcomes, creative workflows and operational approvals. Examples include Albert.ai, Ryze AI, Jellyfish, Muze AI and Uplane. Their public positioning does not prove a particular model architecture or general incremental lift.
 
-The Chinese mobile-internet ad market produced an unusually strong Class 1b. Mobvista (with Mintegral) is a global Class 1b player. Tencent Ads is Class 1a inside the Tencent superapp surface. Alibaba Mama is Class 1a inside Alibaba's e-commerce surface. ByteDance's ad stack is the same pattern at TikTok/Douyin scale. Pinduoduo's ad system follows the same logic.
+[Lapis's YC profile](https://www.ycombinator.com/companies/lapis) currently describes campaign creation and operation; its earlier launch text describes AI-search analytics. Those are dated positioning signals, not evidence of native ChatGPT ad placement. Product scope can change.
 
-Domestic Class 2 (independent agent products sold to brands) is comparatively thin, because the Class 1 surfaces are so dominant that brands prefer to operate inside them rather than buy external automation. This is the inverse of the US picture, where Class 1a and 1b are more fragmented and Class 2 has more room. "Marketing AI agent" narratives — which are largely Class 2/3 narratives — travel awkwardly across the Pacific for this reason.
+The practical competition question is: **what decision, data or execution capability does this product add beyond the channel's built-in automation?** Candidates include profit-aware objectives, cross-channel frequency, refunds, fulfillment constraints and experimentation. Treat these as hypotheses to validate against a simple baseline.
 
-## Synthesis
+## Form 3 — Conversational & Service Agents
 
-The four classes are not in a hierarchy. They are four different positions in the marketing ecosystem, with different customers, economics, technologies, and competitive dynamics. The right question for a builder is not *which tier do I belong to*; it is *which class am I building in, and what does that class's economic structure imply about my moat and my ceiling*.
+Support, sales, renewal and reactivation combine conversations with decisions over time. They can be inbound, outbound, or both; "post-click" is too narrow.
 
-The interesting convergence frontier is the point where Class 3 or Class 4 LLM-native agents gain access to first-party data and start operating with Class 1-level autonomy. That convergence has not yet happened.
+[Sierra Horizon](https://sierra.ai/blog/horizon), announced 2026-07-16, describes proactive interactions over days or months. This is vendor evidence of product scope, not independent evidence of incremental retention or revenue. Decagon, Intercom Fin, Cresta, Ada, Cognigy and Parloa offer additional interaction-system references.
+
+Service resolution and marketing value overlap, but are not identical. Evaluate factual accuracy, task completion, permissions and handoff alongside incremental qualified sales, retention or contribution, including complaints, opt-outs and refunds. Price per resolution is a commercial unit, not a causal outcome metric.
+
+## Form 4 — Agent-Mediated Discovery
+
+Keep four mechanisms separate:
+
+| Mechanism | What is being evaluated | What it does not establish |
+|---|---|---|
+| GEO / AEO | Visibility and citation in generated answers | Incremental purchases or stable rankings |
+| Advertising in AI interfaces | Paid placements, often shown to humans | The agent itself is the advertising audience |
+| Agent-assisted purchasing | Authorized shopping or transaction actions | Buyer/seller agent negotiation |
+| Agent-to-agent interaction | Structured exchanges between agents | Permission, economic value or causal effectiveness |
+
+Profound, Daydream and Scrunch offer discovery-oriented references. [Sitefire's YC profile](https://www.ycombinator.com/companies/sitefire) describes visibility analysis and content/CMS actions; place it here, not under paid placement. Visibility measurement requires a defined query distribution, repeated sampling, model/version tracking and downstream business validation.
+
+Changes to discovery and commerce may alter marketing work. The extent, timing and displacement of existing search remain hypotheses. Do not infer that the category has no commercial scale from missing disclosures in this list.
+
+## Cross-cutting: first-party lifecycle decisioning
+
+Lifecycle decisions concern activation, retention, renewal and reactivation, whether delivered through a conversation, a message, an offer or no contact. They are not confined to conversational service.
+
+[BrazeAI Decisioning Studio](https://www.braze.com/product/brazeai-decisioning-studio) publicly describes first-party data, custom KPIs, channel, incentive and frequency decisions with constraints. This spans Intelligence, Decision, Activation and Measurement and can intersect Forms 2 and 3. Evaluate eligibility → action selection → permissioned delivery → mature outcomes → incremental learning, including a no-contact baseline and negative feedback.
+
+[Hightouch AI Decisioning documentation](https://hightouch.com/docs/ai-decisioning/overview) likewise describes reinforcement-learning-based message, channel and timing decisions with connected delivery. Its agent terminology is evidence of positioning, not proof of LLM-directed planning or causal lift. Reviewed 2026-09-30.
+
+## Economic analysis without a category ranking
+
+Inventory margins, SaaS subscriptions, service charges, outcome prices and spend-linked fees can coexist. Compare revenue recognition, gross margin, operating margin, contribution after service costs, customer concentration and retention over a specified period. Ad spend managed is not revenue. ARR does not isolate the value of LLM reasoning. A customer case without a counterfactual does not prove lift.
+
+Network effects and co-located signals are possible advantages, balanced against publisher dependence, platform access changes, auction competition, customer acquisition and compliance costs. The useful question is which control point creates durable value and whether evidence supports it.
+
+## Chinese and US ecosystem comparison
+
+Compare individual supply surfaces, account access, first-party data, integration costs and customer demand. Tencent, Alibaba and ByteDance operate major owned surfaces; Mintegral aggregates external supply. The proposition that independent orchestration has less room in China needs market and customer evidence; dominance of large platforms alone does not prove it.
+
+## Where to test LLM value
+
+Context-heavy strategy, creative iteration, tool-mediated customer work and information interpretation are plausible opportunities. Compare a model-driven agent with a fixed workflow and a human baseline on correctness, cost, latency, permissions and incremental business outcomes. For high-frequency bidding, measure the proposed system against existing optimizers instead of assuming either technology must win.
+
+First-party access and execution permissions are product-specific. They already occur in lifecycle systems; convergence is not a future event that can be declared absent across the industry. Build an explicit system profile, validate its contribution and revisit it when product scope changes.
